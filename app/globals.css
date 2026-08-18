@@ -136,6 +136,22 @@ body {
   transition: var(--theme-transition);
 }
 
+@media (pointer: fine) {
+  html,
+  body,
+  body * {
+    cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' width='22' height='22'%3E%3Cpath fill='%231671e8' d='M5.5 3.2 L18.8 11.4 L12.6 12.8 L9.9 19.6 Z'/%3E%3C/svg%3E") 5 3, auto !important;
+  }
+}
+
+@media (pointer: fine) {
+  html[data-theme="dark"],
+  html[data-theme="dark"] body,
+  html[data-theme="dark"] body * {
+    cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' width='22' height='22'%3E%3Cpath fill='%23a594fc' d='M5.5 3.2 L18.8 11.4 L12.6 12.8 L9.9 19.6 Z'/%3E%3C/svg%3E") 5 3, auto !important;
+  }
+}
+
 body.detail-lock {
   overflow: hidden;
 }

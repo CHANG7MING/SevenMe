@@ -19,7 +19,7 @@ const photographyPreviewImages = [
   "photo-1617694455303-59af55af7e58", "photo-1709198165282-1dab551df890",
 ];
 
-const chapterIllustrations: Record<ChapterKey, string> = {
+const chapterIllustrations: Partial<Record<ChapterKey, string>> = {
   research: "/chapter-art/research.webp",
   skills: "/chapter-art/skills.webp",
   photography: "/chapter-art/photography.webp",
@@ -215,20 +215,22 @@ export default function Portfolio() {
       <nav className="nav glass">
         <a className="brand" href="#top">CHANG7AN</a>
         <div className="nav-links">
-          {chapters.map((chapter, index) => (
-            <a
-              className={index === activeIndex ? "is-active" : ""}
-              href={`#${chapter.key}`}
-              key={chapter.key}
-              aria-current={index === activeIndex ? "page" : undefined}
-              onClick={(event) => {
-                event.preventDefault();
-                scrollToChapter(index);
-              }}
-            >
-              {chapter.label}
-            </a>
-          ))}
+          <div className="chapter-nav-scroll">
+            {chapters.map((chapter, index) => (
+              <a
+                className={index === activeIndex ? "is-active" : ""}
+                href={`#${chapter.key}`}
+                key={chapter.key}
+                aria-current={index === activeIndex ? "page" : undefined}
+                onClick={(event) => {
+                  event.preventDefault();
+                  scrollToChapter(index);
+                }}
+              >
+                {chapter.label}
+              </a>
+            ))}
+          </div>
           <button
             className="theme-toggle"
             type="button"
@@ -282,9 +284,10 @@ export default function Portfolio() {
             <div className="wind" />
             <div className="chapter-viewport">
               {chapters.map((chapter, index) => {
+                const illustration = chapterIllustrations[chapter.key];
                 return (
                   <article
-                    className={`chapter ${index === visibleChapterIndex ? "is-active" : ""}`}
+                    className={`chapter ${index === visibleChapterIndex ? "is-active" : ""} ${illustration ? "has-illustration" : "no-illustration"}`}
                     id={chapter.key}
                     key={chapter.key}
                   >
@@ -311,14 +314,16 @@ export default function Portfolio() {
                           </ul>
                         )}
                       </div>
-                      <img
-                        className="chapter-illustration"
-                        src={chapterIllustrations[chapter.key]}
-                        alt=""
-                        loading="lazy"
-                        decoding="async"
-                        aria-hidden="true"
-                      />
+                      {illustration && (
+                        <img
+                          className="chapter-illustration"
+                          src={illustration}
+                          alt=""
+                          loading="lazy"
+                          decoding="async"
+                          aria-hidden="true"
+                        />
+                      )}
                       <div className="chapter-foot">
                         <span className="chapter-note">{chapter.note}</span>
                         <button

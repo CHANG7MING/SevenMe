@@ -140,7 +140,7 @@ body {
   html,
   body,
   body * {
-    cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' width='22' height='22'%3E%3Cpath fill='%231671e8' d='M5.5 3.2 L18.8 11.4 L12.6 12.8 L9.9 19.6 Z'/%3E%3C/svg%3E") 5 3, auto !important;
+    cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' width='22' height='22'%3E%3Cpath fill='%23171719' stroke='%23ffffff' stroke-width='1.2' stroke-linejoin='round' d='M5.5 3.2 L18.8 11.4 L12.6 12.8 L9.9 19.6 Z'/%3E%3C/svg%3E") 5 3, auto !important;
   }
 }
 
@@ -148,7 +148,7 @@ body {
   html[data-theme="dark"],
   html[data-theme="dark"] body,
   html[data-theme="dark"] body * {
-    cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' width='22' height='22'%3E%3Cpath fill='%23a594fc' d='M5.5 3.2 L18.8 11.4 L12.6 12.8 L9.9 19.6 Z'/%3E%3C/svg%3E") 5 3, auto !important;
+    cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' width='22' height='22'%3E%3Cpath fill='%23ffffff' stroke='%23171719' stroke-width='1.2' stroke-linejoin='round' d='M5.5 3.2 L18.8 11.4 L12.6 12.8 L9.9 19.6 Z'/%3E%3C/svg%3E") 5 3, auto !important;
   }
 }
 
@@ -391,6 +391,14 @@ button {
 
 .nav-links {
   display: flex;
+  min-width: 0;
+  align-items: center;
+  gap: 3px;
+}
+
+.chapter-nav-scroll {
+  display: flex;
+  min-width: 0;
   align-items: center;
   gap: 3px;
 }
@@ -400,6 +408,7 @@ button {
   border-radius: 6px;
   color: var(--muted-strong);
   font-size: 12px;
+  white-space: nowrap;
   transition: background-color 160ms ease-out, color 160ms ease-out;
 }
 
@@ -797,6 +806,11 @@ html[data-theme="dark"] .hero::before {
     position: relative;
     z-index: 2;
     width: 58%;
+  }
+
+  .chapter.no-illustration .chapter-content,
+  .chapter.no-illustration .chapter-foot {
+    width: 100%;
   }
 
   .chapter-illustration {
@@ -1950,8 +1964,29 @@ html[data-theme="dark"] .photo-lightbox-toolbar > span { background: rgba(255, 2
     padding-left: 14px;
   }
 
-  .nav-links a {
+  .nav-links {
+    flex: 1;
+    justify-content: flex-end;
+    overflow: hidden;
+  }
+
+  .chapter-nav-scroll {
+    flex: 1;
+    justify-content: flex-start;
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+
+  .chapter-nav-scroll::-webkit-scrollbar {
     display: none;
+  }
+
+  .chapter-nav-scroll a {
+    flex: 0 0 auto;
+  }
+
+  .theme-toggle {
+    flex: 0 0 auto;
   }
 
   .status {
